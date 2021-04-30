@@ -73,7 +73,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      episodes: data,
+      episodes: episodes,
     },
     revalidate: 60 * 60 * 8, // Gerar chama api cada 8h
   };
