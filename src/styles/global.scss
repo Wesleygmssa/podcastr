@@ -25,6 +25,12 @@
   }
 }
 
+@media (max-width: 720) {
+  html {
+    font-size: 87.5%;
+  }
+}
+
 body {
   background-color: var(--gray-50);
 }
