@@ -40,7 +40,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         <ul>
           {latestEpisodes.map((episode) => {
             return (
-              <li key={episode.id}>
+              <li key={episode.id} className={styles.teste}>
                 <Image
                   width={192}
                   height={192}
@@ -51,7 +51,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
                 <div className={styles.episodeDatails}>
                   <a href="">{episode.title}</a>
-                  <p>{episode.publishedAt}</p>
+                  <p>{episode.members}</p>
                   <span>{episode.publishedAt}</span>
                   <span>{episode.durationAsString}</span>
                 </div>
@@ -64,7 +64,31 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         </ul>
       </section>
 
-      <section className={styles.allEpisodes}></section>
+      <section className={styles.allEpisodes}>
+        <h2>Todos episódios</h2>
+
+        <table cellSpacing={0}>
+          <thead>
+            <th></th>
+            <th>Podcast</th>
+            <th>Integrantes</th>
+            <th>Data</th>
+            <th>Duração</th>
+            <th></th>
+          </thead>
+          <tbody>
+            {allEpisodes.map((episode) => {
+              return (
+                <tr key={episode.id}>
+                  <td>
+                    <Image width={120} height={120} src={episode.thumbnail} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 }
