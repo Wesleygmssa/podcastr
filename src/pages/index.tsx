@@ -36,6 +36,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
         <h2>Útimos lançamentos</h2>
+<<<<<<< HEAD
         <ul>
           {latestEpisodes.map((episode) => {
             return (
@@ -62,12 +63,65 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   </button>
                 </li>
               </>
+=======
+
+        <ul>
+          {latestEpisodes.map((episode) => {
+            return (
+              <li key={episode.id} className={styles.teste}>
+                <Image
+                  width={192}
+                  height={192}
+                  src={episode.thumbnail}
+                  alt={episode.title}
+                  objectFit="cover"
+                />
+
+                <div className={styles.episodeDatails}>
+                  <a href="">{episode.title}</a>
+                  <p>{episode.members}</p>
+                  <span>{episode.publishedAt}</span>
+                  <span>{episode.durationAsString}</span>
+                </div>
+                <button type="button">
+                  <img src="play-green.svg" alt="Tocar episódio" />
+                </button>
+              </li>
+>>>>>>> 084a9d7fbf99e1947563bc802f13ae05974c1fe6
             );
           })}
         </ul>
       </section>
 
+<<<<<<< HEAD
       <section className={styles.allEpisodes}></section>
+=======
+      <section className={styles.allEpisodes}>
+        <h2>Todos episódios</h2>
+
+        <table cellSpacing={0}>
+          <thead>
+            <th></th>
+            <th>Podcast</th>
+            <th>Integrantes</th>
+            <th>Data</th>
+            <th>Duração</th>
+            <th></th>
+          </thead>
+          <tbody>
+            {allEpisodes.map((episode) => {
+              return (
+                <tr key={episode.id}>
+                  <td>
+                    <Image width={120} height={120} src={episode.thumbnail} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
+>>>>>>> 084a9d7fbf99e1947563bc802f13ae05974c1fe6
     </div>
   );
 }
@@ -76,7 +130,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
   //_limit=12&_sort=published_at&_order=desc
   const { data } = await api.get("episodes", {
-    //chama api
+    //passando parametros com axios
     params: {
       _limit: 12,
       _sort: "published_at",
@@ -84,6 +138,7 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   });
 
+  //Transformação de dados
   const episodes = data.map((episode) => {
     return {
       id: episode.id,
@@ -95,6 +150,7 @@ export const getStaticProps: GetStaticProps = async () => {
       }),
       duration: Number(episode.file.duration),
       durationAsString: convertDurationToTimeString(
+        //convertendo horas
         Number(episode.file.duration)
       ),
       description: episode.description,
@@ -102,8 +158,13 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   });
 
+<<<<<<< HEAD
   const latestEpisodes = episodes.slice(0, 2); // ultimos
   const allEpisodes = episodes.slice(2); // tamanho do array
+=======
+  const latestEpisodes = episodes.slice(0, 2); //pegar ultimos episodios
+  const allEpisodes = episodes.slice(2); // restante dos episodes
+>>>>>>> 084a9d7fbf99e1947563bc802f13ae05974c1fe6
 
   return {
     props: {
