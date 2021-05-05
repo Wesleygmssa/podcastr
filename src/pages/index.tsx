@@ -6,6 +6,8 @@ import ptBR from "date-fns/locale/pt-BR";
 import { GetStaticProps } from "next";
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString.ts";
+import styles from "./home.module.scss";
+import Image from "next/image";
 
 type Episode = {
   id: string;
@@ -20,10 +22,10 @@ type Episode = {
 
 type HomeProps = {
   latestEpisodes: Episode[];
-  episodes: Episode[];
+  allEpisodes: Episode[];
 };
 
-export default function Home(props: HomeProps) {
+export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   // useEffect(() => {
   //   fetch("http://localhost:3333/episodes")
   //     .then((response) => response.json())
@@ -31,10 +33,39 @@ export default function Home(props: HomeProps) {
   // }, []);
 
   return (
-    <>
-      <h1>Index</h1>
-      <p>{JSON.stringify(props.episodes)}</p>
-    </>
+    <div className={styles.homepage}>
+      <section className={styles.latestEpisodes}>
+        <h2>Útimos lançamentos</h2>
+
+        <ul>
+          {latestEpisodes.map((episode) => {
+            return (
+              <li key={episode.id}>
+                <Image
+                  width={192}
+                  height={192}
+                  src={episode.thumbnail}
+                  alt={episode.title}
+                  objectFit="cover"
+                />
+
+                <div className={styles.episodeDatails}>
+                  <a href="">{episode.title}</a>
+                  <p>{episode.publishedAt}</p>
+                  <span>{episode.publishedAt}</span>
+                  <span>{episode.durationAsString}</span>
+                </div>
+                <button type="button">
+                  <img src="play-green.svg" alt="Tocar episódio" />
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      <section className={styles.allEpisodes}></section>
+    </div>
   );
 }
 
@@ -42,7 +73,7 @@ export default function Home(props: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
   //_limit=12&_sort=published_at&_order=desc
   const { data } = await api.get("episodes", {
-    //chama api
+    //passando parametros com axios
     params: {
       _limit: 12,
       _sort: "published_at",
@@ -50,6 +81,7 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   });
 
+  //Transformação de dados
   const episodes = data.map((episode) => {
     return {
       id: episode.id,
@@ -61,6 +93,7 @@ export const getStaticProps: GetStaticProps = async () => {
       }),
       duration: Number(episode.file.duration),
       durationAsString: convertDurationToTimeString(
+        //convertendo horas
         Number(episode.file.duration)
       ),
       description: episode.description,
@@ -68,12 +101,13 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   });
 
-  const latestEpisodes = episodes.slice(0, 2);
-  const allEpisodes = episodes.slice(2);
+  const latestEpisodes = episodes.slice(0, 2); //pegar ultimos episodios
+  const allEpisodes = episodes.slice(2); // restante dos episodes
 
   return {
     props: {
-      episodes: episodes,
+      latestEpisodes,
+      allEpisodes,
     },
     revalidate: 60 * 60 * 8, // Gerar chama api cada 8h
   };
