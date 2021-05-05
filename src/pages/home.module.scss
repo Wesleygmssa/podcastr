@@ -1,11 +1,7 @@
 .homepage {
   padding: 0 4rem;
   height: calc(100vh - 6.5rem);
-<<<<<<< HEAD
-  overflow-y: scroll;
-=======
   overflow-y: scroll; //scroll dentro do container
->>>>>>> 084a9d7fbf99e1947563bc802f13ae05974c1fe6
 
   h2 {
     margin-top: 3rem;
@@ -35,22 +31,13 @@
         height: 6rem;
         border-radius: 1rem;
       }
-<<<<<<< HEAD
-
-      .episodeDetails {
-        border: 1px solid red;
-=======
       .episodeDatails {
->>>>>>> 084a9d7fbf99e1947563bc802f13ae05974c1fe6
         flex: 1;
         margin-left: 1rem;
 
         a {
           display: block;
           color: var(--gray-800);
-<<<<<<< HEAD
-        }
-=======
           font-family: Lexend, sans-serif;
           font-weight: 600;
           text-decoration: none;
@@ -97,7 +84,6 @@
     }
 
     button {
-      border: 1px solid red;
       position: absolute;
       right: 2rem;
       bottom: 2rem;
@@ -117,7 +103,6 @@
 
       &:hover {
         filter: brightness(0.95);
->>>>>>> 084a9d7fbf99e1947563bc802f13ae05974c1fe6
       }
     }
   }

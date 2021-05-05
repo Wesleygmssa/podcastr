@@ -36,34 +36,6 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
         <h2>Útimos lançamentos</h2>
-<<<<<<< HEAD
-        <ul>
-          {latestEpisodes.map((episode) => {
-            return (
-              <>
-                <li key={episode.id}>
-                  <Image
-                    className={styles.image}
-                    width={192}
-                    height={192}
-                    src={episode.thumbnail}
-                    alt={episode.title}
-                    objectFit="cover"
-                  />
-
-                  <div className={styles.episodeDetails}>
-                    <a href="">{episode.title}</a>
-                    <p>{episode.members}</p>
-                    <span>{episode.publishedAt}</span>
-                    <span>{episode.durationAsString}</span>
-                  </div>
-
-                  <button type="button">
-                    <img src="/play-green.svg" alt="Tocar espisódio" />
-                  </button>
-                </li>
-              </>
-=======
 
         <ul>
           {latestEpisodes.map((episode) => {
@@ -87,15 +59,11 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <img src="play-green.svg" alt="Tocar episódio" />
                 </button>
               </li>
->>>>>>> 084a9d7fbf99e1947563bc802f13ae05974c1fe6
             );
           })}
         </ul>
       </section>
 
-<<<<<<< HEAD
-      <section className={styles.allEpisodes}></section>
-=======
       <section className={styles.allEpisodes}>
         <h2>Todos episódios</h2>
 
@@ -121,7 +89,6 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           </tbody>
         </table>
       </section>
->>>>>>> 084a9d7fbf99e1947563bc802f13ae05974c1fe6
     </div>
   );
 }
@@ -158,13 +125,8 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   });
 
-<<<<<<< HEAD
-  const latestEpisodes = episodes.slice(0, 2); // ultimos
-  const allEpisodes = episodes.slice(2); // tamanho do array
-=======
   const latestEpisodes = episodes.slice(0, 2); //pegar ultimos episodios
   const allEpisodes = episodes.slice(2); // restante dos episodes
->>>>>>> 084a9d7fbf99e1947563bc802f13ae05974c1fe6
 
   return {
     props: {
