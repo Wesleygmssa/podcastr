@@ -9,6 +9,8 @@ import { convertDurationToTimeString } from "../utils/convertDurationToTimeStrin
 import styles from "./home.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
+import { PlayerContext } from "../contexts/PlayerContext";
 
 type Episode = {
   id: string;
@@ -27,6 +29,8 @@ type HomeProps = {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+  const player = useContext(PlayerContext);
+
   // useEffect(() => {
   //   fetch("http://localhost:3333/episodes")
   //     .then((response) => response.json())
@@ -36,7 +40,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
-        <h2>Útimos lançamentos</h2>
+        <h2>Útimos lançamentos {player}</h2>
 
         <ul>
           {latestEpisodes.map((episode) => {
