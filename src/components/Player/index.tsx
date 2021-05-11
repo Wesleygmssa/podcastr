@@ -3,12 +3,12 @@ import { PlayerContext } from "../../contexts/PlayerContext";
 import styles from "./styles.module.scss";
 
 export function Player() {
-  const player = useContext(PlayerContext);
+  const { currentEpisodeIndex } = useContext(PlayerContext);
   return (
     <div className={styles.playerContainer}>
       <header>
         <img src="/playing.svg" alt="Tocando agora" />
-        <strong>Tocando agora {player}</strong>
+        <strong>Tocando agora </strong>
       </header>
 
       <div className={styles.emptyPlayer}>
