@@ -29,7 +29,7 @@ type HomeProps = {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const player = useContext(PlayerContext);
+  const { play } = useContext(PlayerContext);
 
   // useEffect(() => {
   //   fetch("http://localhost:3333/episodes")
@@ -40,7 +40,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
-        <h2>Útimos lançamentos {player}</h2>
+        <h2>Útimos lançamentos </h2>
 
         <ul>
           {latestEpisodes.map((episode) => {
@@ -107,7 +107,12 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <td style={{ width: 100 }}>{episode.publishedAt}</td>
                   <td>{episode.durationAsString}</td>
                   <td>
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        play(episode);
+                      }}
+                    >
                       <img src="/play-green.svg" alt="Tocar episódio" />
                     </button>
                   </td>
