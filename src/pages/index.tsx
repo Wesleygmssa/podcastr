@@ -51,7 +51,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   height={192}
                   src={episode.thumbnail}
                   alt={episode.title}
-                  objectFit="cover"
+                  objectFit="contain"
                 />
 
                 <div className={styles.episodeDatails}>
@@ -100,7 +100,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                       height={120}
                       src={episode.thumbnail}
                       alt={episode.title}
-                      objectFit="cover"
+                      objectFit="contain"
                     />
                   </td>
                   <td>

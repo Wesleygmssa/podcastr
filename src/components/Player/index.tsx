@@ -43,7 +43,7 @@ export function Player() {
             width={592}
             height={592}
             src={episode.thumbnail}
-            objectFit="cover"
+            objectFit="contain"
           />
           <strong>{episode.title}</strong>
           <span>{episode.members}</span>
