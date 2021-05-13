@@ -3,6 +3,10 @@
 </h3>
 
 <p align="center">
+   <img src="podcast.png" >
+</p>
+
+<p align="center">
    <img src="home.png" >
 </p>
 
