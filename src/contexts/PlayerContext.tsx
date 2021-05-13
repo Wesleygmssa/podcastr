@@ -3,7 +3,7 @@ import { createContext } from "react";
 type Episode = {
   title: string;
   members: string;
-  thumbanail: string;
+  thumbnail: string;
   duration: number;
   url: string;
 };
@@ -11,12 +11,16 @@ type Episode = {
 type PlayerContextData = {
   episodeList: Array<Episode>;
   currentEpisodeIndex: number;
+  isPlaying: boolean;
   play: (episode: Episode) => void;
+  setPlayState: (state: boolean) => void;
+  togglePlay: () => void;
 };
 
-// export const PlayerContext = createContext({
-//   episodeList: [],
-//   currentEpisodeIndex: 0,
-// });
+/* ***Poderia ser dessa forma
+export const PlayerContext = createContext({
+  episodeList: [],
+  currentEpisodeIndex: 0,
+}); */
 
 export const PlayerContext = createContext({} as PlayerContextData);
