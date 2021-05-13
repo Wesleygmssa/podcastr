@@ -3,7 +3,7 @@
 </h3>
 
 <p align="center">
-   <img src="podcast.png" >
+   <img src="podcast.gif" >
 </p>
 
 <p align="center">
