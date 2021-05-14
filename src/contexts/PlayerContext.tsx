@@ -12,14 +12,18 @@ type PlayerContextData = {
   episodeList: Array<Episode>;
   currentEpisodeIndex: number;
   isPlaying: boolean;
+  isShuffLing: boolean;
   play: (episode: Episode) => void;
   setPlayState: (state: boolean) => void;
   togglePlay: () => void;
   playNext: () => void;
   playPrevious: () => void;
+  toggleShuffle: () => void;
   playList: (list: Episode[], index: number) => void;
   hasNext: boolean;
   hasPrevius: boolean;
+  isLooping: boolean;
+  toggleLoop: () => void;
 };
 
 type PlayContextProviderProps = {
@@ -43,6 +47,8 @@ export function PlayerContextProvider({ children }: PlayContextProviderProps) {
   const [episodeList, setEpisodeList] = useState([]);
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
+  const [isShuffLing, setIsShuffLing] = useState(false);
 
   function play(episode: Episode) {
     setEpisodeList([episode]);
@@ -62,6 +68,15 @@ export function PlayerContextProvider({ children }: PlayContextProviderProps) {
   function togglePlay() {
     setIsPlaying(!isPlaying); //true || false
   }
+
+  function toggleLoop() {
+    setIsLooping(!isLooping); //true || false
+  }
+
+  function toggleShuffle() {
+    setIsShuffLing(!isShuffLing); //true || false
+  }
+
   function setPlayState(state: boolean) {
     setIsPlaying(state);
   }
@@ -70,7 +85,12 @@ export function PlayerContextProvider({ children }: PlayContextProviderProps) {
   const hasNext = currentEpisodeIndex + 1 < episodeList.length;
 
   function playNext() {
-    if (hasNext) {
+    if (isShuffLing) {
+      const nextRandomEpisodeIndex = Math.floor(
+        Math.random() * episodeList.length
+      );
+      setCurrentEpisodeIndex(nextRandomEpisodeIndex);
+    } else if (hasNext) {
       setCurrentEpisodeIndex(currentEpisodeIndex + 1);
     }
   }
@@ -98,6 +118,10 @@ export function PlayerContextProvider({ children }: PlayContextProviderProps) {
         playNext,
         hasPrevius,
         hasNext,
+        toggleLoop,
+        isLooping,
+        toggleShuffle,
+        isShuffLing,
       }}
     >
       {children}
