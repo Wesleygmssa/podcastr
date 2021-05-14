@@ -7,6 +7,7 @@ import { convertDurationToTimeString } from "../../utils/convertDurationToTimeSt
 import styles from "./episode.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { usePlayer } from "../../contexts/PlayerContext";
 
 type Episode = {
   id: string;
@@ -25,7 +26,8 @@ type EpisodeProps = {
 };
 
 export default function Episode({ episode }: EpisodeProps) {
-  const router = useRouter(); // Hooks só de ser usado dentro de componente
+  const {} = usePlayer();
+  const router = useRouter(); // Hooks só pode ser usado dentro de componente
 
   return (
     <div className={styles.episode}>

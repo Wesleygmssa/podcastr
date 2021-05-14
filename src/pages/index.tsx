@@ -29,7 +29,11 @@ type HomeProps = {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const { play } = useContext(PlayerContext);
+  const { playList } = useContext(PlayerContext);
+
+  /* **Podendo o push **** utilizando imutabilidade questão de performasse */
+  /* **Criando uma nova informação de tudo que já existe */
+  const episodeList = [...latestEpisodes, ...allEpisodes];
 
   // useEffect(() => {
   //   fetch("http://localhost:3333/episodes")
@@ -43,7 +47,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         <h2>Útimos lançamentos </h2>
 
         <ul>
-          {latestEpisodes.map((episode) => {
+          {latestEpisodes.map((episode, index) => {
             return (
               <li key={episode.id} className={styles.teste}>
                 <Image
@@ -65,7 +69,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 <button
                   type="button"
                   onClick={() => {
-                    play(episode);
+                    playList(episodeList, index);
                   }}
                 >
                   <img src="play-green.svg" alt="Tocar episódio" />
@@ -91,7 +95,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             </tr>
           </thead>
           <tbody>
-            {allEpisodes.map((episode) => {
+            {allEpisodes.map((episode, index) => {
               return (
                 <tr key={episode.id}>
                   <td style={{ width: 100 }}>
@@ -115,7 +119,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                     <button
                       type="button"
                       onClick={() => {
-                        play(episode);
+                        playList(episodeList, index + latestEpisodes.length);
                       }}
                     >
                       <img src="/play-green.svg" alt="Tocar episódio" />

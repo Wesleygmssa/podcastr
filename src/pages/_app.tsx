@@ -6,6 +6,9 @@ import { PlayerContextProvider } from "../contexts/PlayerContext";
 
 function MyApp({ Component, pageProps }) {
   return (
+    /* ***
+     **SEPARANDO COMTEXTO **** DESSA FORMA FICA MAIS ORGANIZADO
+     *****/
     <PlayerContextProvider>
       <div className={styles.wrapper}>
         <main>

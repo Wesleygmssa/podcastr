@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 type Episode = {
   title: string;
@@ -15,7 +15,11 @@ type PlayerContextData = {
   play: (episode: Episode) => void;
   setPlayState: (state: boolean) => void;
   togglePlay: () => void;
+  playNext: () => void;
+  playPrevious: () => void;
   playList: (list: Episode[], index: number) => void;
+  hasNext: boolean;
+  hasPrevius: boolean;
 };
 
 type PlayContextProviderProps = {
@@ -28,10 +32,13 @@ export const PlayerContext = createContext({
   currentEpisodeIndex: 0,
 }); */
 
-//variavel para armarzenar dados do contexto
+/***
+ *** variavel para armarzenar dados do contexto *****
+ ** */
+
 export const PlayerContext = createContext({} as PlayerContextData);
 
-//Contexto que estava no APP;
+//*****Contexto que estava no APP*******
 export function PlayerContextProvider({ children }: PlayContextProviderProps) {
   const [episodeList, setEpisodeList] = useState([]);
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
@@ -43,7 +50,9 @@ export function PlayerContextProvider({ children }: PlayContextProviderProps) {
     setIsPlaying(true);
   }
 
-  // EX: 12 episodios
+  /**
+   **** EX: 12 episodios ****
+   ***/
   function playList(list: Episode[], index: number) {
     setEpisodeList(list);
     setCurrentEpisodeIndex(index);
@@ -55,6 +64,21 @@ export function PlayerContextProvider({ children }: PlayContextProviderProps) {
   }
   function setPlayState(state: boolean) {
     setIsPlaying(state);
+  }
+
+  const hasPrevius = currentEpisodeIndex > 0;
+  const hasNext = currentEpisodeIndex + 1 < episodeList.length;
+
+  function playNext() {
+    if (hasNext) {
+      setCurrentEpisodeIndex(currentEpisodeIndex + 1);
+    }
+  }
+
+  function playPrevious() {
+    if (hasPrevius) {
+      setCurrentEpisodeIndex(currentEpisodeIndex - 1);
+    }
   }
 
   return (
@@ -70,9 +94,17 @@ export function PlayerContextProvider({ children }: PlayContextProviderProps) {
         togglePlay,
         setPlayState,
         playList,
+        playPrevious,
+        playNext,
+        hasPrevius,
+        hasNext,
       }}
     >
       {children}
     </PlayerContext.Provider>
   );
 }
+
+export const usePlayer = () => {
+  return useContext(PlayerContext);
+};
